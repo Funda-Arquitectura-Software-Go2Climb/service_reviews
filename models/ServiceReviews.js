@@ -20,7 +20,12 @@ module.exports = (sequelize, DataTypes) => {
     tourist_id: {
       type: DataTypes.INTEGER,
       allowNull: false
+    },
+    serviceId: {
+      type: DataTypes.INTEGER,
+      allowNull: false
     }
+
   }, {
     sequelize,
     modelName: 'ServiceReviews', 

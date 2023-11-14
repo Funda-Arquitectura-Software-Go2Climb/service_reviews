@@ -11,24 +11,37 @@ const createReview = async (review) => {
 };
 
 const getReviews = async () => {
-  return repository.getReviews();
+  const reviews = await repository.getReviews();
+
+  if (!reviews) {
+    return null;
+  }
+
+  const reviewsWithTourists = await Promise.all(reviews.map(async review => {
+    const tourist = await touristService.getTouristById(review.tourist_id);
+    if (tourist) {
+      review.dataValues.tourist = tourist;
+      delete review.dataValues.tourist_id;
+    }
+    return review.dataValues;
+  }));
+
+  return reviewsWithTourists;
 };
 
 const getReviewById = async (id) => {
   const review = await repository.getReviewById(id);
-  
+
   if (!review) {
-      return null;
-  }
-  
-  const tourist = await touristService.getTouristById(review.tourist_id); 
-  if (tourist) {
-      // Aquí estamos utilizando dataValues para acceder a los datos directamente
-      review.dataValues.tourist = tourist;
-      delete review.dataValues.tourist_id;
+    return null;
   }
 
-  // Devolver dataValues para enviar como respuesta
+  const tourist = await touristService.getTouristById(review.tourist_id);
+  if (tourist) {
+    review.dataValues.tourist = tourist;
+    delete review.dataValues.tourist_id;
+  }
+
   return review.dataValues;
 };
 

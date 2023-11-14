@@ -12,7 +12,7 @@ const getServices = async () => {
 
 const getServicesById = async (servicesId) => {
     try {
-        const response = await axios.get(`http://localhost:3000/services/${servicesId}`);
+        const response = await axios.get(`http://localhost:8081/api/v1/service/${servicesId}`);
         return response.data;
     } catch (error) {
         throw new Error(`Error al obtener el service con ID ${servicesId}: ${error.message}`);

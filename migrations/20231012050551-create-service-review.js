@@ -24,6 +24,10 @@ module.exports = {
       tourist_id: {
         type: Sequelize.INTEGER,
         allowNull: false
+      },
+      service_id: {
+        type: Sequelize.INTEGER,
+        allowNull: false
       }
     });
   },

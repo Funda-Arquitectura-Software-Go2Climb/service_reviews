@@ -1,6 +1,5 @@
 const repository = require('../repositories/repository');
 const touristService = require('./touristService');
-const serviceService = require('./serviceService'); // Agrega este import
 
 const createReview = async (review) => {
   const tourists = await touristService.getTourists();
@@ -20,17 +19,9 @@ const getReviews = async () => {
 
   const reviewsWithTourists = await Promise.all(reviews.map(async review => {
     const tourist = await touristService.getTouristById(review.tourist_id);
-    const service = await serviceService.getServicesById(review.service_id); // Obtén toda la información del servicio
-    if (tourist && service) {
+    if (tourist) {
       review.dataValues.tourist = tourist;
       delete review.dataValues.tourist_id;
-      review.dataValues.service = service; // Agrega la información del servicio
-      delete review.dataValues.service_id;
-    } else {
-      review.dataValues.tourist = '[no existe usuario]';
-      delete review.dataValues.tourist_id;
-      review.dataValues.service = '[no existe servicio]';
-      delete review.dataValues.service_id;
     }
     return review.dataValues;
   }));
@@ -46,12 +37,9 @@ const getReviewById = async (id) => {
   }
 
   const tourist = await touristService.getTouristById(review.tourist_id);
-  const service = await serviceService.getServicesById(review.service_id); // Obtén toda la información del servicio
-  if (tourist && service) {
+  if (tourist) {
     review.dataValues.tourist = tourist;
     delete review.dataValues.tourist_id;
-    review.dataValues.service = service; // Agrega la información del servicio
-    delete review.dataValues.service_id;
   }
 
   return review.dataValues;
@@ -62,4 +50,3 @@ module.exports = {
   getReviews,
   getReviewById
 };
-

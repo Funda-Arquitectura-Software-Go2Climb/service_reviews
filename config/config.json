@@ -4,6 +4,7 @@
     "password": "fcgcA325cbF1H5F43BFD6GHge34EAhAa",
     "database": "railway",
     "host": "viaduct.proxy.rlwy.net",
+    "port":3306,
     "dialect": "mysql"
   },
   "test": {

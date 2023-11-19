@@ -16,6 +16,9 @@ RUN npm install
 # Ahora copia el resto de los archivos
 COPY . .
 
+# Ejecuta las migraciones de Sequelize
+RUN npx sequelize db:migrate
+
 # Expón el puerto en el que tu aplicación se ejecuta
 EXPOSE 3001
 

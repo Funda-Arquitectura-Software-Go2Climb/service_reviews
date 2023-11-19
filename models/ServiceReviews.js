@@ -1,10 +1,16 @@
 'use strict';
+
 const { Model } = require('sequelize');
 
 module.exports = (sequelize, DataTypes) => {
   class ServiceReviews extends Model {}
 
   ServiceReviews.init({
+    id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true
+    },
     date: {
       type: DataTypes.DATE,
       allowNull: false

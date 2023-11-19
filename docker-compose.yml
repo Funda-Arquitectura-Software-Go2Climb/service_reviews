@@ -1,0 +1,16 @@
+version: '3'
+services:
+  mysql_service_review:
+    image: mysql:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: service_reviews_db
+    ports:
+      - "3307:3307"
+
+  node-app:
+    build: .
+    ports:
+      - "3001:3001"
+    depends_on:
+      - mysql_service_review  

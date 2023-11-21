@@ -2,7 +2,7 @@ const axios = require('axios');
 
 const getServices = async () => {
     try {
-        const response = await axios.get('http://host.docker.internal:8081/api/v1/service');
+        const response = await axios.get('https://servicemicro.azurewebsites.net/api/v1/service');
         return response.data;
     } catch (error) {
         console.error("Error fetching services:", error);
@@ -11,7 +11,7 @@ const getServices = async () => {
 }
 const getServicesById = async (servicesId) => {
     try {
-        const response = await axios.get(`http://host.docker.internal:8081/api/v1/service/${servicesId}`);
+        const response = await axios.get(`https://servicemicro.azurewebsites.net/api/v1/service/${servicesId}`);
         return response.data;
     } catch (error) {
         throw new Error(`Error al obtener el service con ID ${servicesId}: ${error.message}`);
@@ -22,3 +22,5 @@ module.exports = {
     getServices,
     getServicesById
 };
+
+
